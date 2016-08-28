@@ -9,6 +9,11 @@ class MySpider(CrawlSpider):
     name = 'douban.com'
     allowed_domains = ['douban.com']
     start_urls = ['https://www.douban.com/group/jianshen/discussion?start=0']
+    custom_settings = {
+        'ITEM_PIPELINES':{
+            'myspider.pipelines.JsonWithEncodingPipeline': 400,
+            }
+    }
 
     rules = (
         Rule(LinkExtractor(allow=('discussion\?start=0')),follow=False,callback='parse_list'),
